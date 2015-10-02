@@ -31,13 +31,12 @@ function checkWidth()
 
   });
 
-  centerRows();
   smush();
+  centerRows();
 }
 
 //function that takes columns out of rows that are too full and adds
 //a new row above it for the extra columns
-//FIX: This needs to break off the largest chunk of columns it can into a new row
 function breakOff(targetColumn)
 {
   //resetting the margins of the column, in case it was already checked previously
@@ -57,10 +56,7 @@ function breakOff(targetColumn)
 
 //function that pushes columns back into their original layout when
 //there is enough room for them
-//FIX: This doesn't take into account that there could be previously
-//smushed rows that have to take individual cols out and put into
-//their original layout
-//FIX: Is the proper place for this to be called at the end of checkWidth()?
+//FIX: Need to get this to work for non-original rows, should be easy
 function smush()
 {
 
@@ -95,13 +91,14 @@ function smush()
         prevRow.remove();
       }
     }
-
+    fixMargins(curRow);
   }
 
 }
 
 //function that centers rows that can't take anymore, but still aren't
 //100% full
+//can i use percentFilled() on this?
 function centerRows()
 {
 
@@ -192,10 +189,6 @@ function fixMargins(targetRow)
   var numChildren = 1;
 
   targetRow.children(".column").each(function(){
-    if(numChildren == 1)
-    {
-      
-    }
-
+    $(this).css("margin-left", "");
   });
 }
