@@ -1,0 +1,70 @@
+html, body
+{
+  margin: 0;
+  padding: 0;
+}
+
+div
+{
+  height: 10rem;
+}
+
+.twelve
+{
+  background-color: silver;
+}
+
+.eleven
+{
+  background-color: gold;
+}
+
+.ten
+{
+  background-color: yellow;
+}
+
+.nine
+{
+  background-color: indigo;
+}
+
+.eight
+{
+  background-color: teal;
+}
+
+.seven
+{
+  background-color: seagreen;
+}
+
+.six
+{
+  background-color: blue;
+}
+
+.five
+{
+  background-color: grey;
+}
+
+.four
+{
+  background-color: green;
+}
+
+.three
+{
+  background-color: red;
+}
+
+.two
+{
+  background-color: orange;
+}
+
+.one
+{
+  background-color: purple;
+}

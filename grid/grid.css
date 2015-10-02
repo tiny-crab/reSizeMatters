@@ -1,0 +1,200 @@
+.container
+{
+  /*change width to whatever*/
+  width: 100%;
+  margin: auto;
+}
+
+.fluid
+{
+  padding: 0;
+  margin: 0;
+  clear: both;
+}
+
+.row:before,
+.row:after
+{
+  content: "";
+  display: table;
+}
+
+.row:after
+{
+  clear: both;
+}
+
+.column
+{
+  display: block;
+  float: left;
+  margin-left: 2%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+}
+
+.column:first-child
+{
+  margin-left: 0;
+}
+
+.twelve
+{
+  width: 100%;
+}
+
+.eleven
+{
+  width: 91.5%;
+}
+
+.ten
+{
+  width: 83%;
+}
+
+.nine
+{
+  width: 74.5%;
+}
+
+.eight
+{
+  width: 66%;
+}
+
+.seven
+{
+  width: 57.5%;
+}
+
+.six
+{
+  width: 49%;
+}
+
+.five
+{
+  width: 40.5%;
+}
+
+.four
+{
+  width: 32%;
+}
+
+.three
+{
+  width: 23.5%;
+}
+
+.two
+{
+  width: 15%;
+}
+
+.one
+{
+  width: 6.5%;
+}
+
+@media screen and (max-width: 640px)
+{
+  /*The .fluid selectors make sure that the divs inside other columns don't get
+  resized as the screen changes. That way tables and navs stay nice looking :)*/
+
+  .fluid > .eleven
+  {
+    width: 100%;
+  }
+
+  .fluid > .ten
+  {
+    width: 100%;
+  }
+
+  .fluid > .nine
+  {
+    width: 100%;
+  }
+
+  .fluid > .eight
+  {
+    width: 100%;
+  }
+
+  .fluid > .seven
+  {
+    width: 100%;
+  }
+
+  .fluid > .six
+  {
+    width: 100%;
+  }
+    .fluid > .five
+  {
+    width: 75%;
+  }
+
+  .fluid > .four
+  {
+    width: 64%;
+  }
+
+  .fluid > .three
+  {
+    width: 47%;
+  }
+
+  .fluid > .two
+  {
+    width: 30%;
+  }
+
+  .fluid > .one
+  {
+    width: 13%;
+  }
+}
+
+@media screen and (max-width: 480px)
+{
+  .fluid > .five
+  {
+    width: 100%;
+  }
+
+  .fluid > .four
+  {
+    width: 100%;
+  }
+
+  .fluid > .three
+  {
+    width: 100%;
+  }
+
+  .fluid > .two
+  {
+    width: 49%;
+  }
+
+  .fluid > .one
+  {
+    width: 23.5%;
+  }
+}
+
+@media screen and (max-width: 320px)
+{
+  .fluid > .two
+  {
+    width: 100%;
+  }
+
+  .fluid > .one
+  {
+    width: 100%;
+  }
+}
