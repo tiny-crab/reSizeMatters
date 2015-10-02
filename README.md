@@ -23,7 +23,7 @@ use ".fluid" if you want to keep tables of data lined up nicely or nav buttons s
 
 3. Use ".column" to indicate columns. Use ".one", ".two", ".three", etc. Put these inside rows. This grid uses a
 12-column system, so make all of your columns add up to 12 inside of a row. Or don't. The JS will automatically
-center your sort of empty rows inside of your container.
+center your not-full rows inside of your container.
 
 4. Create your own divs inside of the ".column" divs. Manipulating HTML elements that are children of these columns
 will make your life much easier, rather than trying to format the columns themselves.
