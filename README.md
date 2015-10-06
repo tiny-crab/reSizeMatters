@@ -33,5 +33,5 @@ will make your life much easier, rather than trying to format the columns themse
 5x. Report bugs!
 
 FIXES THAT NEED TO BE FINISHED:
-  Rows that aren't "original" are not condensing as they should. A row full of ".one" cols turns into an antenna
-  at a small screen size. This is first priority.
+  - Condensing twelve one-cols or six two-cols ends up irregular, not in pairs or quads
+  - I'm going to add some "priority" cols, so a col marked with priority gets added to its own row before other children
