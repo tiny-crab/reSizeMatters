@@ -1,7 +1,7 @@
 .container
 {
   /*change width to whatever*/
-  width: 70%;
+  width: 100%;
   margin: auto;
 }
 
@@ -34,8 +34,8 @@
   display: block;
   float: left;
   margin-left: 2%;
-  margin-top: 1%;
-  margin-bottom: 1%;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .column:first-child

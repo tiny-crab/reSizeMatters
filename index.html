@@ -3,7 +3,7 @@
     <title>reSizeMatters</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="grid.js"></script>
-    <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Oswald:300' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Merriweather' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="grid.css">
     <link rel="stylesheet" type="text/css" href="main.css">
@@ -14,20 +14,26 @@
       <div class="fluid row">
         <div class="twelve column">
           <div class="top">
-            reSizeMatters
-          </br><hr>
-            A grid for the laymen like me.
+            <div class="title">
+              reSizeMatters
+            </br>
+              A grid for the laymen like me.
+            </br>
+            </br>
+              <a href="http://github.com/zakattak/reSizeMatters">
+                <div class="button">
+                  Download
+                </div>
+              </a>
+            </div>
           </div>
+
         </div>
       </div>
 
       <div class="fluid row">
-        <div class="four column">
-          <a href="http://github.com/zakattak/reSizeMatters">
-            <div class="button">
-              Get the source on Github!
-            </div>
-          </a>
+        <div class="three column">
+
         </div>
       </div>
 
@@ -73,9 +79,12 @@
           Use these script tags in your HTML page's header
         </div>
         <div class="six column">
-          <code>
-            script
-          </code>
+          <pre><code>
+&lt;head&gt;
+  &lt;script src=&quot;grid.js&quot;&gt;&lt;/script&gt;
+  &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;grid.css&quot;&gt;
+&lt;/head&gt;
+          </code></pre>
         </div>
       </div>
 
@@ -85,9 +94,12 @@
           (you can adjust the width in the "grid.css" file)
         </div>
         <div class="six column">
-          <code>
-            script
-          </code>
+          <pre><code>
+&lt;body&gt;
+  &lt;div class="container"&gt;
+  &lt;/div&gt;
+&lt;body&gt;
+          </code></pre>
         </div>
       </div>
 
@@ -99,9 +111,19 @@
           table or elements that stay side-by-side.
         </div>
         <div class="six column">
-          <code>
-            script
-          </code>
+          <pre><code>
+&lt;body&gt;
+  &lt;div class=&quot;container&quot;&gt;
+
+    &lt;div class=&quot;fluid row&quot;&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;row&quot;&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+&lt;body&gt;
+          </code></pre>
         </div>
       </div>
 
