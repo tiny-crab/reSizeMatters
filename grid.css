@@ -12,6 +12,11 @@
   clear: both;
 }
 
+.row
+{
+  height: auto;
+}
+
 .row:before,
 .row:after
 {

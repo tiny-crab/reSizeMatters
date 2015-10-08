@@ -24,6 +24,7 @@ a
 
 .button
 {
+  height: 2rem;
   outer-width: 100%;
   text-align: center;
   font-family: sans-serif;
