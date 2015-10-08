@@ -6,94 +6,128 @@ $(document).ready(function()
   window.onresize = checkWidth;
 });
 
-
-//function to check if the row is too full or not full enough
+//function to make sure that rows are condensed enough and not too full
 function checkWidth()
 {
-  //for every fluid row...
+  //array to store all row objects
+  var allRows = [];
+
+  //pushing all of the row objects into the array
   $(".container").children(".fluid").each(function(){
-    //$this is now a fluid row within the html doc
-    var rowPercentFilled = percentFilled($(this));
-
-    var origChildren = $(this).children().length;
-
-    if(rowPercentFilled > 100)
-    {
-      //breaking off the first child of the row that is too full
-      breakOff( $(this).find(":first-child") );
-    }
-
-    //checking to see if a column was broken off, in order to check again
-    if( $(this).children().length < origChildren)
-    {
-      checkWidth();
-    }
-
+    allRows.push($(this));
   });
 
-  smush();
+  //in order to start at the bottom of the page
+  allRows.reverse();
+
+  //iterating through each row at a time
+  for (var x = 0; x < allRows.length; x++)
+  {
+    //the row the loop is looking at (starting from bottommost row on the page)
+    var curRow = allRows[x];
+    //the row directly above the curRow
+    var rowAbove = allRows[x + 1];
+    //a var with a percentage of how full the row is
+    var rowPercentFilled = percentFilled(curRow);
+
+    //while the row is too big (checking to remove children into new row)
+    while ( rowPercentFilled > 100 )
+    {
+      //if there is no row above or it's an original row
+      if (rowAbove === undefined || rowAbove.attr("original"))
+      {
+        //create a new row above the current row
+        rowAbove = newRow(curRow);
+      }
+
+      //get the first child of the too-big row
+      var firstChild = curRow.find(":first-child");
+
+      //always put the first child into the row above the too-big row
+      breakOff(firstChild, rowAbove);
+
+      //refreshing the check value
+      rowPercentFilled = percentFilled(curRow);
+    }
+
+    //while the row is too small (checking to pull children from rows above)
+    while ( rowPercentFilled < 100)
+    {
+      //if the row above it is undefined or it is an original row
+      if (rowAbove === undefined || rowAbove.attr("original"))
+      {
+        //break out of loop
+        break;
+      }
+      else
+      {
+        //getting the last child of the row above
+        var lastChild = rowAbove.find(":last-child");
+        //ratio% of the lastchild to its row
+        var lastChildRatio = ( lastChild.width() / rowAbove.width() ) * 100;
+
+        //if the child was added, would it be less than 100% full?
+        if ((rowPercentFilled + lastChildRatio) <= 100)
+        {
+          //since the last child can fit, prepend it
+          lastChild.prependTo(curRow);
+
+          //delete the rowAbove if it has no children anymore
+          if(rowAbove.children().length == 0)
+          {
+            rowAbove.remove();
+          }
+
+          //refreshing the check value
+          rowPercentFilled = percentFilled(curRow);
+        }
+        else
+        {
+          //otherwise break out of the loop
+          break;
+        }
+
+      }
+
+    }
+
+    //this resets the array in order to take into account the new rows created
+    allRows = [];
+
+    //pushing all of the row objects into the array
+    $(".container").children(".fluid").each(function(){
+      allRows.push($(this));
+    });
+
+    //in order to start at the bottom of the page
+    allRows.reverse();
+  }
+
+  fixMargins();
   centerRows();
 }
 
-//function that takes columns out of rows that are too full and adds
-//a new row above it for the extra columns
-function breakOff(targetColumn)
+//function to create a new row on top of the row object passed to it
+function newRow(targetRow)
 {
-  //resetting the margins of the column, in case it was already checked previously
-  targetColumn.css({"margin-left":"0", "margin-right":"0"});
-  //referencing the row that the column will be detached from
-  var parentDiv = targetColumn.parent();
   //creating a new template for the new row to insert the column into
   var newRow = $("<div>").addClass("fluid row");
   //add a new row above the parent row
-  parentDiv.before(newRow);
+  targetRow.before(newRow);
+  //passing the newly constructed object back so breakOff() can use it as a parameter
+  return newRow;
+}
+
+//function to take children from overfull rows and put them into the row above
+function breakOff(targetColumn, targetRow)
+{
+  //resetting the margins of the column, in case it was already checked previously
+  targetColumn.css({"margin-left":"0", "margin-right":"0"});
 
   //pull targeted column out
   targetColumn.detach();
   //push into the newly created row
-  targetColumn.appendTo(newRow);
-}
-
-//function that pushes columns back into their original layout when
-//there is enough room for them
-//FIX: Need to get this to work for non-original rows, should be easy
-function smush()
-{
-
-  var allRows = [];
-  //grabs all fluid rows and puts the objects into an array
-  $(".container").children(".fluid").each(function(){
-    allRows.push($(this));
-  });
-  //for each row inside the doc
-  for( var x = 0; x < allRows.length; x++)
-  {
-    //curRow is simply the current row that the loop is looking at
-    var curRow = allRows[x];
-    //prevRow is the row directly above the one that the loop is looking at
-    var prevRow = allRows[x - 1];
-
-    if(prevRow === undefined)
-    {
-      continue;
-    }
-    //if it has the colsinside attr, it's an original!
-    if( (curRow.attr("original") ) )
-    {
-      var curRowPercentFilled = percentFilled(curRow);
-      var prevRowPercentFilled = percentFilled(prevRow);
-      var total = curRowPercentFilled + prevRowPercentFilled;
-
-      if(total <= 100)
-      {
-        var lastChild = prevRow.find(":last-child");
-        lastChild.prependTo(curRow);
-        prevRow.remove();
-      }
-    }
-    fixMargins(curRow);
-  }
-
+  targetColumn.appendTo(targetRow);
 }
 
 //function that centers rows that can't take anymore, but still aren't
@@ -163,11 +197,11 @@ function percentFilled(targetRow)
     //$this is now a column div
 
     //find the width of the column (this)
-    colWidth = $(this).width();
+    var colWidth = $(this).width();
     //find the width of the container (site width)
-    containerWidth = $(".container").width();
+    var windowWidth = window.innerWidth;
     //what percentage of the screen does it take up
-    ratio = Math.floor((colWidth/containerWidth) * 100);
+    ratio = ((colWidth/windowWidth) * 100);
     //adding the percentage of the column to the total percent filled
     rowPercentFilled += ratio;
   });
@@ -184,11 +218,12 @@ function percentFilled(targetRow)
   return rowPercentFilled;
 }
 
-function fixMargins(targetRow)
+//function to fix spacing with new children in correctly condensed rows
+function fixMargins()
 {
-  var numChildren = 1;
-
-  targetRow.children(".column").each(function(){
-    $(this).css("margin-left", "");
+  $(".container").children(".fluid").each(function(){
+    $(this).children(".column").each(function(){
+      $(this).css("margin-left", "");
+    });
   });
 }
