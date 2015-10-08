@@ -38,5 +38,7 @@ will make your life much easier, rather than trying to format the columns themse
   - "centered" class on a col is the only time centerRows() is called on a row, instead of all rows in default
   - Use different width properties in order to let column divs to be manipulated properly. Right now, a new div needs to be created
     inside of a column div
+  - Versions for other popular column layouts (10, 16, 20) or maybe an app that properly calculates the margins and column sizes
+    for those
   - Add "priority" col class, so a col marked with priority gets added to its own row before other children (for layout)
   - Working on a demo website!
