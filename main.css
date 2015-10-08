@@ -1,5 +1,9 @@
-#nav
+.top
 {
-  border: solid black 1px;
-  width: 100%;
+  outer-width: 100%;
+  text-align: center;
+  border-radius: .2rem;
+  border: black 1px solid;
+  height: 2rem;
+  font-family: cursive;
 }
