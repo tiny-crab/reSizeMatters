@@ -7,3 +7,16 @@
   height: 2rem;
   font-family: cursive;
 }
+
+.desc
+{
+  width: 100%;
+  border: black 1px solid;
+  border-radius: .2rem;
+}
+
+.desc p
+{
+  font-family: sans-serif;
+  text-align: center;
+}
