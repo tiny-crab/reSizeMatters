@@ -30,9 +30,11 @@ will make your life much easier, rather than trying to format the columns themse
 
 5. Enjoy yourself.
 
-**5x. Report bugs!**
+*5x. Report bugs!*
 
-Ideas that may or may not be implemented:
+
+
+**Ideas that may or may not be implemented:**
   - "centered" class on a col is the only time centerRows() is called on a row, instead of all rows in default
   - Use different width properties in order to let column divs to be manipulated properly. Right now, a new div needs to be created
     inside of a column div
