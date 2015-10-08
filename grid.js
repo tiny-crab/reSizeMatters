@@ -17,6 +17,9 @@ function checkWidth()
     allRows.push($(this));
   });
 
+  //is there a way to mark certain rows that contain other rows, and then fix
+  //those rows individually?
+
   //in order to start at the bottom of the page
   allRows.reverse();
 
