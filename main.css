@@ -1,0 +1,39 @@
+a
+{
+  text-decoration: none;
+  color: inherit;
+}
+
+.top
+{
+  outer-width: 100%;
+  text-align: center;
+  border-radius: .2rem;
+  border: black 1px solid;
+  height: 2rem;
+  font-family: cursive;
+}
+
+.desc
+{
+  outer-width: 100%;
+  border: black 1px solid;
+  border-radius: .2rem;
+  font-family: sans-serif;
+}
+
+.button
+{
+  height: 2rem;
+  outer-width: 100%;
+  text-align: center;
+  font-family: sans-serif;
+  background-color: rgb(137, 185, 43);
+  border-radius: .4rem;
+}
+
+code
+{
+  border-top: blue solid 1px;
+  border-right: blue solid 1px;
+}

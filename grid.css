@@ -1,7 +1,7 @@
 .container
 {
   /*change width to whatever*/
-  width: 100%;
+  width: 85%;
   margin: auto;
 }
 
@@ -10,6 +10,11 @@
   padding: 0;
   margin: 0;
   clear: both;
+}
+
+.row
+{
+  height: auto;
 }
 
 .row:before,
