@@ -11,10 +11,19 @@ function checkWidth()
 {
   //array to store all row objects
   var allRows = [];
+  var nestedRows = [];
 
   //pushing all of the row objects into the array
   $(".container").children(".fluid").each(function(){
     allRows.push($(this));
+
+    $(this).children(".fluid").each(function(){
+      nestedRows.push($(this));
+    });
+
+    //if the row has other rows for children, then push it into the nestedRow
+    //array. After allrows is done, push each row (with rows in it) into the for
+    //loop so it can be sorted through
   });
 
   //is there a way to mark certain rows that contain other rows, and then fix
