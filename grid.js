@@ -38,16 +38,12 @@ function checkWidth(layer)
     //a var with a percentage of how full the row is
     var rowPercentFilled = percentFilled(curRow);
 
-    if( curRow.find(".fluid").length != 0 )
-    {
-      var rowsInside = [];
-
-      curRow.children(".fluid").each(function(){
-        rowsInside.push($(this));
-      });
-
-      checkWidth(rowsInside);
-    }
+    curRow.children(".column").each(function(){
+      if( $(this).find(".fluid").length != 0 )
+      {
+        checkWidth($(this));
+      }
+    });
 
     //while the row is too big (checking to remove children into new row)
     while ( rowPercentFilled > 100 )
