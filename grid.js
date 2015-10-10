@@ -1,8 +1,8 @@
 $(document).ready(function()
 {
-  rememberRows();
+  rememberRows($(".container"));
   findRows();
-  centerRows();
+  centerRows($(".container"));
   window.onresize = findRows;
 });
 
@@ -12,6 +12,8 @@ function findRows()
   //then it needs to determine whether or not those rows have rows inside of them
   //getting all rows from container is easy:
   checkWidth($(".container"));
+
+  //this is a separate function because of onresize stupidity
 }
 
 //push a selector into this function
@@ -117,6 +119,9 @@ function checkWidth(layer)
     //in order to start at the bottom of the page
     rowArray.reverse();
   }
+
+  centerRows(layer);
+  fixMargins(layer);
 }
 
 //function to create a new row on top of the row object passed to it
@@ -145,7 +150,7 @@ function breakOff(targetColumn, targetRow)
 //function that centers rows that can't take anymore, but still aren't
 //100% full
 //can i use percentFilled() on this?
-function centerRows()
+function centerRows(layer)
 {
 
   var colWidth = 0;
@@ -154,7 +159,7 @@ function centerRows()
   var allColWidth = 0;
   var numCols = 0;
   //inside a container class, each fluid row...
-  $(".container").children(".fluid").each(function(){
+  layer.children(".fluid").each(function(){
     //$this is now a row, now checking each column
     //get the number of children it has
     numCols = $(this).children().length;
@@ -162,9 +167,9 @@ function centerRows()
       //find the width of the column (this)
       colWidth = $(this).width();
       //find the width of the window
-      containerWidth = $(".container").width();
+      layerWidth = layer.width();
       //what percentage of the screen does it take up
-      ratio = Math.ceil((colWidth/containerWidth) * 100);
+      ratio = Math.ceil((colWidth/layerWidth) * 100);
       //adding to allColWidth in order to determine how full the row is
       allColWidth += ratio;
     });
@@ -191,10 +196,10 @@ function centerRows()
 }
 
 //function to mark original rows in order to keep layout
-function rememberRows()
+function rememberRows(layer)
 {
   //for every row...
-  $(".container").children(".fluid").each(function(){
+  layer.children(".fluid").each(function(){
     //make it known that it is original
     $(this).attr("original", "yes");
   });
@@ -231,9 +236,9 @@ function percentFilled(targetRow)
 }
 
 //function to fix spacing with new children in correctly condensed rows
-function fixMargins()
+function fixMargins(layer)
 {
-  $(".container").children(".fluid").each(function(){
+  layer.children(".fluid").each(function(){
     $(this).children(".column").each(function(){
       $(this).css("margin-left", "");
     });
