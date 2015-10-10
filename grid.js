@@ -124,18 +124,17 @@ function checkWidth(layer)
     //in order to start at the bottom of the page
     rowArray.reverse();
   }
-
-  //centering the rows in this layer (whether container or inside row)
-  centerRows(layer);
-  //fixing margins in this layer (whether container or inside row)
-  fixMargins(layer);
+  fixMargins($(".container"));
+  centerRows($(".container"));
 }
 
 //function to create a new row on top of the row object passed to it
 function newRow(targetRow)
 {
+  var classOfRow = targetRow.attr("class");
+
   //creating a new template for the new row to insert the column into
-  var newRow = $("<div>").addClass("fluid row");
+  var newRow = $("<div>").addClass(classOfRow);
   //add a new row above the parent row
   targetRow.before(newRow);
   //passing the newly constructed object back so breakOff() can use it as a parameter
@@ -161,7 +160,7 @@ function centerRows(layer)
 {
 
   var colWidth = 0;
-  var containerWidth = 0;
+  var layerWidth = 0;
   var ratio = 0;
   var allColWidth = 0;
   var numCols = 0;
@@ -172,7 +171,7 @@ function centerRows(layer)
     //checking each of this row's children to see if it holds more rows
     $(this).children(".column").each(function(){
 
-      //if it does,
+      //if THIS column has fluid rows inside of it,
       if( $(this).find(".fluid").length != 0 )
       {
         //recurse!
@@ -180,9 +179,6 @@ function centerRows(layer)
       }
 
     });
-
-
-
 
     //get the number of children it has
     numCols = $(this).children().length;
@@ -218,6 +214,7 @@ function centerRows(layer)
     //resetting for next row
     allColWidth = 0;
   });
+
 }
 
 //function to mark original rows in order to keep layout
@@ -287,9 +284,9 @@ function fixMargins(layer)
           fixMargins($(this));
         }
 
-      });
+        //just fix the margins inside this row
+        $(this).css("margin-left", "");
 
-      //just fix the margins inside this row
-      $(this).css("margin-left", "");
+      });
   });
 }

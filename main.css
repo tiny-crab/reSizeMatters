@@ -89,6 +89,34 @@ hr
   margin-top: 1rem;
 }
 
+.demo, .demo2, .demo3
+{
+  font-family: 'Oswald', sans-serif;
+  height: 5rem;
+  border-radius: 1rem;
+  text-align: center;
+  font-size: 2rem;
+  line-height: 5rem;
+}
+
+.demo
+{
+  background-color: #89b92b;
+}
+
+.demo2
+{
+  background-color: #4D6C0E;
+}
+
+
+
+.demo-row
+{
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
 .intro
 {
   margin-top: 1rem;
