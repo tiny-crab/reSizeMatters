@@ -1,34 +1,56 @@
 $(document).ready(function()
 {
-  rememberRows();
-  checkWidth();
-  centerRows();
-  window.onresize = checkWidth;
+  //marks all rows that are direct children of the container div
+  rememberRows($(".container"));
+  //indirectly checks all rows that are direct children of the container div
+  findRows();
+  //centers all rows that are direct children of the container div
+  centerRows($(".container"));
+  //every time the window changes size, the rows are checked
+  window.onresize = findRows;
 });
 
-//function to make sure that rows are condensed enough and not too full
-function checkWidth()
+//function that calls checkWidth for the container div because of .onresize stupidity
+function findRows()
 {
-  //array to store all row objects
-  var allRows = [];
+  checkWidth($(".container"));
+}
+
+//push a selector into this function (carrying fluid rows)
+//this function makes sure that the rows inside are holding all they can
+function checkWidth(layer)
+{
+  //array to hold all arrays in this layer
+  var rowArray = [];
 
   //pushing all of the row objects into the array
-  $(".container").children(".fluid").each(function(){
-    allRows.push($(this));
+  layer.children(".fluid").each(function(){
+    rowArray.push($(this));
   });
 
   //in order to start at the bottom of the page
-  allRows.reverse();
+  rowArray.reverse();
 
   //iterating through each row at a time
-  for (var x = 0; x < allRows.length; x++)
+  for (var x = 0; x < rowArray.length; x++)
   {
     //the row the loop is looking at (starting from bottommost row on the page)
-    var curRow = allRows[x];
+    var curRow = rowArray[x];
     //the row directly above the curRow
-    var rowAbove = allRows[x + 1];
+    var rowAbove = rowArray[x + 1];
     //a var with a percentage of how full the row is
     var rowPercentFilled = percentFilled(curRow);
+
+    //recursion to search through this row and find if it has rows inside
+    //check each of this row's columns...
+    curRow.children(".column").each(function(){
+      //and if they contain a fluid row
+      if( $(this).find(".fluid").length != 0 )
+      {
+        //recursion!! I love recursion
+        checkWidth($(this));
+      }
+    });
 
     //while the row is too big (checking to remove children into new row)
     while ( rowPercentFilled > 100 )
@@ -91,27 +113,28 @@ function checkWidth()
 
     }
 
-    //this resets the array in order to take into account the new rows created
-    allRows = [];
+    //using this to reset the layer and go again
+    var rowArray = [];
 
     //pushing all of the row objects into the array
-    $(".container").children(".fluid").each(function(){
-      allRows.push($(this));
+    layer.children(".fluid").each(function(){
+      rowArray.push($(this));
     });
 
     //in order to start at the bottom of the page
-    allRows.reverse();
+    rowArray.reverse();
   }
-
-  fixMargins();
-  centerRows();
+  fixMargins($(".container"));
+  centerRows($(".container"));
 }
 
 //function to create a new row on top of the row object passed to it
 function newRow(targetRow)
 {
+  var classOfRow = targetRow.attr("class");
+
   //creating a new template for the new row to insert the column into
-  var newRow = $("<div>").addClass("fluid row");
+  var newRow = $("<div>").addClass(classOfRow);
   //add a new row above the parent row
   targetRow.before(newRow);
   //passing the newly constructed object back so breakOff() can use it as a parameter
@@ -133,29 +156,44 @@ function breakOff(targetColumn, targetRow)
 //function that centers rows that can't take anymore, but still aren't
 //100% full
 //can i use percentFilled() on this?
-function centerRows()
+function centerRows(layer)
 {
 
   var colWidth = 0;
-  var containerWidth = 0;
+  var layerWidth = 0;
   var ratio = 0;
   var allColWidth = 0;
   var numCols = 0;
   //inside a container class, each fluid row...
-  $(".container").children(".fluid").each(function(){
+  layer.children(".fluid").each(function(){
     //$this is now a row, now checking each column
+
+    //checking each of this row's children to see if it holds more rows
+    $(this).children(".column").each(function(){
+
+      //if THIS column has fluid rows inside of it,
+      if( $(this).find(".fluid").length != 0 )
+      {
+        //recurse!
+        centerRows($(this));
+      }
+
+    });
+
     //get the number of children it has
     numCols = $(this).children().length;
+
     $(this).children(".column").each(function(){
       //find the width of the column (this)
       colWidth = $(this).width();
       //find the width of the window
-      containerWidth = $(".container").width();
+      layerWidth = layer.width();
       //what percentage of the screen does it take up
-      ratio = Math.ceil((colWidth/containerWidth) * 100);
+      ratio = Math.ceil((colWidth/layerWidth) * 100);
       //adding to allColWidth in order to determine how full the row is
       allColWidth += ratio;
     });
+
     //the first child doesn't have a left margin, so the number of spaces
     //in the middle of columns are one less than the total # of cols
     numCols -= 1;
@@ -176,13 +214,27 @@ function centerRows()
     //resetting for next row
     allColWidth = 0;
   });
+
 }
 
 //function to mark original rows in order to keep layout
-function rememberRows()
+function rememberRows(layer)
 {
   //for every row...
-  $(".container").children(".fluid").each(function(){
+  layer.children(".fluid").each(function(){
+
+    //checking this row to see if it has rows inside
+    $(this).children(".column").each(function(){
+
+      //if it does,
+      if( $(this).find(".fluid").length != 0 )
+      {
+        //recurse!
+        rememberRows($(this));
+      }
+
+    });
+
     //make it known that it is original
     $(this).attr("original", "yes");
   });
@@ -219,11 +271,22 @@ function percentFilled(targetRow)
 }
 
 //function to fix spacing with new children in correctly condensed rows
-function fixMargins()
+function fixMargins(layer)
 {
-  $(".container").children(".fluid").each(function(){
-    $(this).children(".column").each(function(){
-      $(this).css("margin-left", "");
-    });
+  //for all rows in this layer
+  layer.children(".fluid").each(function(){
+      //and for all columns in this row
+      $(this).children(".column").each(function(){
+        //check if there are rows inside of this column
+        if( $(this).find(".fluid").length != 0 )
+        {
+          //recurse!
+          fixMargins($(this));
+        }
+
+        //just fix the margins inside this row
+        $(this).css("margin-left", "");
+
+      });
   });
 }
