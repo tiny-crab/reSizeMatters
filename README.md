@@ -25,12 +25,9 @@ use ".fluid" if you want to keep tables of data lined up nicely or nav buttons s
 12-column system, so make all of your columns add up to 12 inside of a row. Or don't. The JS will automatically
 center your not-full rows inside of your container.
 
-4. Create your own divs inside of the ".column" divs. Manipulating HTML elements that are children of these columns
-will make your life much easier, rather than trying to format the columns themselves.
+4. Enjoy yourself.
 
-5. Enjoy yourself.
-
-*5x. Report bugs!*
+*4x. Report bugs!*
 
 
 

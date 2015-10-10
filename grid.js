@@ -1,25 +1,26 @@
 $(document).ready(function()
 {
+  //marks all rows that are direct children of the container div
   rememberRows($(".container"));
+  //indirectly checks all rows that are direct children of the container div
   findRows();
+  //centers all rows that are direct children of the container div
   centerRows($(".container"));
+  //every time the window changes size, the rows are checked
   window.onresize = findRows;
 });
 
+//function that calls checkWidth for the container div because of .onresize stupidity
 function findRows()
 {
-  //needs to get all rows on the first layer (children of container)
-  //then it needs to determine whether or not those rows have rows inside of them
-  //getting all rows from container is easy:
   checkWidth($(".container"));
-
-  //this is a separate function because of onresize stupidity
 }
 
-//push a selector into this function
+//push a selector into this function (carrying fluid rows)
 //this function makes sure that the rows inside are holding all they can
 function checkWidth(layer)
 {
+  //array to hold all arrays in this layer
   var rowArray = [];
 
   //pushing all of the row objects into the array
@@ -40,9 +41,13 @@ function checkWidth(layer)
     //a var with a percentage of how full the row is
     var rowPercentFilled = percentFilled(curRow);
 
+    //recursion to search through this row and find if it has rows inside
+    //check each of this row's columns...
     curRow.children(".column").each(function(){
+      //and if they contain a fluid row
       if( $(this).find(".fluid").length != 0 )
       {
+        //recursion!! I love recursion
         checkWidth($(this));
       }
     });
@@ -120,7 +125,9 @@ function checkWidth(layer)
     rowArray.reverse();
   }
 
+  //centering the rows in this layer (whether container or inside row)
   centerRows(layer);
+  //fixing margins in this layer (whether container or inside row)
   fixMargins(layer);
 }
 
@@ -161,8 +168,25 @@ function centerRows(layer)
   //inside a container class, each fluid row...
   layer.children(".fluid").each(function(){
     //$this is now a row, now checking each column
+
+    //checking each of this row's children to see if it holds more rows
+    $(this).children(".column").each(function(){
+
+      //if it does,
+      if( $(this).find(".fluid").length != 0 )
+      {
+        //recurse!
+        centerRows($(this));
+      }
+
+    });
+
+
+
+
     //get the number of children it has
     numCols = $(this).children().length;
+
     $(this).children(".column").each(function(){
       //find the width of the column (this)
       colWidth = $(this).width();
@@ -173,6 +197,7 @@ function centerRows(layer)
       //adding to allColWidth in order to determine how full the row is
       allColWidth += ratio;
     });
+
     //the first child doesn't have a left margin, so the number of spaces
     //in the middle of columns are one less than the total # of cols
     numCols -= 1;
@@ -200,6 +225,19 @@ function rememberRows(layer)
 {
   //for every row...
   layer.children(".fluid").each(function(){
+
+    //checking this row to see if it has rows inside
+    $(this).children(".column").each(function(){
+
+      //if it does,
+      if( $(this).find(".fluid").length != 0 )
+      {
+        //recurse!
+        rememberRows($(this));
+      }
+
+    });
+
     //make it known that it is original
     $(this).attr("original", "yes");
   });
@@ -238,9 +276,20 @@ function percentFilled(targetRow)
 //function to fix spacing with new children in correctly condensed rows
 function fixMargins(layer)
 {
+  //for all rows in this layer
   layer.children(".fluid").each(function(){
-    $(this).children(".column").each(function(){
+      //and for all columns in this row
+      $(this).children(".column").each(function(){
+        //check if there are rows inside of this column
+        if( $(this).find(".fluid").length != 0 )
+        {
+          //recurse!
+          fixMargins($(this));
+        }
+
+      });
+
+      //just fix the margins inside this row
       $(this).css("margin-left", "");
-    });
   });
 }
