@@ -1,46 +1,53 @@
 $(document).ready(function()
 {
   rememberRows();
-  checkWidth();
+  findRows();
   centerRows();
-  window.onresize = checkWidth;
+  window.onresize = findRows;
 });
 
-//function to make sure that rows are condensed enough and not too full
-function checkWidth()
+function findRows()
 {
-  //array to store all row objects
-  var allRows = [];
-  var nestedRows = [];
+  //needs to get all rows on the first layer (children of container)
+  //then it needs to determine whether or not those rows have rows inside of them
+  //getting all rows from container is easy:
+  checkWidth($(".container"));
+}
+
+//push a selector into this function
+//this function makes sure that the rows inside are holding all they can
+function checkWidth(layer)
+{
+  var rowArray = [];
 
   //pushing all of the row objects into the array
-  $(".container").children(".fluid").each(function(){
-    allRows.push($(this));
-
-    $(this).children(".fluid").each(function(){
-      nestedRows.push($(this));
-    });
-
-    //if the row has other rows for children, then push it into the nestedRow
-    //array. After allrows is done, push each row (with rows in it) into the for
-    //loop so it can be sorted through
+  layer.children(".fluid").each(function(){
+    rowArray.push($(this));
   });
 
-  //is there a way to mark certain rows that contain other rows, and then fix
-  //those rows individually?
-
   //in order to start at the bottom of the page
-  allRows.reverse();
+  rowArray.reverse();
 
   //iterating through each row at a time
-  for (var x = 0; x < allRows.length; x++)
+  for (var x = 0; x < rowArray.length; x++)
   {
     //the row the loop is looking at (starting from bottommost row on the page)
-    var curRow = allRows[x];
+    var curRow = rowArray[x];
     //the row directly above the curRow
-    var rowAbove = allRows[x + 1];
+    var rowAbove = rowArray[x + 1];
     //a var with a percentage of how full the row is
     var rowPercentFilled = percentFilled(curRow);
+
+    if( curRow.find(".fluid").length != 0 )
+    {
+      var rowsInside = [];
+
+      curRow.children(".fluid").each(function(){
+        rowsInside.push($(this));
+      });
+
+      checkWidth(rowsInside);
+    }
 
     //while the row is too big (checking to remove children into new row)
     while ( rowPercentFilled > 100 )
@@ -103,20 +110,17 @@ function checkWidth()
 
     }
 
-    //this resets the array in order to take into account the new rows created
-    allRows = [];
+    //using this to reset the layer and go again
+    var rowArray = [];
 
     //pushing all of the row objects into the array
-    $(".container").children(".fluid").each(function(){
-      allRows.push($(this));
+    layer.children(".fluid").each(function(){
+      rowArray.push($(this));
     });
 
     //in order to start at the bottom of the page
-    allRows.reverse();
+    rowArray.reverse();
   }
-
-  fixMargins();
-  centerRows();
 }
 
 //function to create a new row on top of the row object passed to it
