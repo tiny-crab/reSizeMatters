@@ -251,7 +251,7 @@ function percentFilled(targetRow)
     //find the width of the column (this)
     var colWidth = $(this).width();
     //find the width of the container (site width)
-    var windowWidth = window.innerWidth;
+    var windowWidth = window.width;
     //what percentage of the screen does it take up
     ratio = ((colWidth/windowWidth) * 100);
     //adding the percentage of the column to the total percent filled
