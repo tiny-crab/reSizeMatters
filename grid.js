@@ -45,7 +45,7 @@ function checkWidth(layer)
     //check each of this row's columns...
     curRow.children(".column").each(function(){
       //and if they contain a fluid row
-      if( $(this).find(".fluid").length != 0 )
+      if( $(this).find(".fluid").length !== 0 )
       {
         //recursion!! I love recursion
         checkWidth($(this));
@@ -95,7 +95,7 @@ function checkWidth(layer)
           lastChild.prependTo(curRow);
 
           //delete the rowAbove if it has no children anymore
-          if(rowAbove.children().length == 0)
+          if(rowAbove.children().length === 0)
           {
             rowAbove.remove();
           }
@@ -114,7 +114,7 @@ function checkWidth(layer)
     }
 
     //using this to reset the layer and go again
-    var rowArray = [];
+    rowArray = [];
 
     //pushing all of the row objects into the array
     layer.children(".fluid").each(function(){
