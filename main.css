@@ -55,6 +55,16 @@ hr
     rgb(137, 185, 4, 0));
 }
 
+pre
+{
+  border-radius: .5rem;
+  background-color: rgb(210, 210, 210);
+  color: black;
+  width: 75%;
+  margin: auto;
+  overflow-y: scroll;
+}
+
 .top
 {
   height: 30rem;
@@ -138,6 +148,17 @@ hr
   font-family: 'Merriweather', serif;
   padding: 2rem;
   line-height: 1.7rem;
+}
+
+.instructions
+{
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.instruct
+{
+  padding: 1rem;
 }
 
 @media screen and (max-width: 640px)
