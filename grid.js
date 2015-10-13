@@ -2,9 +2,8 @@ $(document).ready(function()
 {
   //marks all rows that are direct children of the container div
   rememberRows($(".container"));
-  centerRows($(".container"));
   //indirectly checks all rows that are direct children of the container div
-  findRows();
+  centerRows($(".container"));
   //every time the window changes size, the rows are checked
   window.onresize = findRows;
 });
