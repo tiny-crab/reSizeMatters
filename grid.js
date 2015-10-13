@@ -4,8 +4,6 @@ $(document).ready(function()
   rememberRows($(".container"));
   //indirectly checks all rows that are direct children of the container div
   findRows();
-  //centers all rows that are direct children of the container div
-  centerRows($(".container"));
   //every time the window changes size, the rows are checked
   window.onresize = findRows;
 });
@@ -249,7 +247,7 @@ function percentFilled(targetRow)
     //$this is now a column div
 
     //find the width of the column (this)
-    var colWidth = $(this).width();
+    var colWidth = $(this).outerWidth();
     //find the width of the container (site width)
     var windowWidth = ($(".container")).width();
     //what percentage of the screen does it take up
