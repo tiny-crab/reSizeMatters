@@ -103,7 +103,7 @@
   width: 6.5%;
 }
 
-@media screen and (max-width: 640px)
+@media screen and (max-width: 888px)
 {
   /*The .fluid selectors make sure that the divs inside other columns don't get
   resized as the screen changes. That way tables and navs stay nice looking :)*/
@@ -163,7 +163,7 @@
   }
 }
 
-@media screen and (max-width: 480px)
+@media screen and (max-width: 666px)
 {
   .fluid > .five
   {
@@ -191,7 +191,7 @@
   }
 }
 
-@media screen and (max-width: 320px)
+@media screen and (max-width: 480px)
 {
   .fluid > .two
   {
