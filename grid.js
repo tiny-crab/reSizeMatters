@@ -3,8 +3,6 @@ $(document).ready(function()
   //marks all rows that are direct children of the container div
   rememberRows($(".container"));
   //indirectly checks all rows that are direct children of the container div
-  findRows();
-  //centers all rows that are direct children of the container div
   centerRows($(".container"));
   //every time the window changes size, the rows are checked
   window.onresize = findRows;
@@ -45,7 +43,7 @@ function checkWidth(layer)
     //check each of this row's columns...
     curRow.children(".column").each(function(){
       //and if they contain a fluid row
-      if( $(this).find(".fluid").length != 0 )
+      if( $(this).find(".fluid").length !== 0 )
       {
         //recursion!! I love recursion
         checkWidth($(this));
@@ -95,7 +93,7 @@ function checkWidth(layer)
           lastChild.prependTo(curRow);
 
           //delete the rowAbove if it has no children anymore
-          if(rowAbove.children().length == 0)
+          if(rowAbove.children().length === 0)
           {
             rowAbove.remove();
           }
@@ -114,7 +112,7 @@ function checkWidth(layer)
     }
 
     //using this to reset the layer and go again
-    var rowArray = [];
+    rowArray = [];
 
     //pushing all of the row objects into the array
     layer.children(".fluid").each(function(){
@@ -249,9 +247,9 @@ function percentFilled(targetRow)
     //$this is now a column div
 
     //find the width of the column (this)
-    var colWidth = $(this).width();
+    var colWidth = $(this).outerWidth();
     //find the width of the container (site width)
-    var windowWidth = window.innerWidth;
+    var windowWidth = ($(".container")).width();
     //what percentage of the screen does it take up
     ratio = ((colWidth/windowWidth) * 100);
     //adding the percentage of the column to the total percent filled

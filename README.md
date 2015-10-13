@@ -38,4 +38,4 @@ center your not-full rows inside of your container.
   - Versions for other popular column layouts (10, 16, 20) or maybe an app that properly calculates the margins and column sizes
     for those
   - Add "priority" col class, so a col marked with priority gets added to its own row before other children (for layout)
-  - Working on a demo website!
+  - Documentation!

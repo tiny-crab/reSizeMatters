@@ -28,6 +28,22 @@ p
   font-family: 'Merriweather', serif;
 }
 
+h1
+{
+  font-size: 2rem;
+  font-family: 'Oswald', sans-serif;
+  color: white;
+  margin:0;
+}
+
+h2
+{
+  font-size: 1.2rem;
+  font-family: 'Oswald', sans-serif;
+  color: white;
+  margin:0;
+}
+
 hr
 {
   border: 0;
@@ -39,22 +55,30 @@ hr
     rgb(137, 185, 4, 0));
 }
 
+pre
+{
+  border-radius: .5rem;
+  background-color: rgb(210, 210, 210);
+  color: black;
+  width: 75%;
+  margin: auto;
+  overflow-x: auto;
+}
+
 .top
 {
   height: 30rem;
   padding-top: 5rem;
   padding-bottom: 2rem;
   width: 100%;
-  text-align: center;
+
   background-image: url("img/background.jpg");
   background-size: cover;
 }
 
 .title
 {
-  font-size: 2rem;
-  font-family: 'Oswald', sans-serif;
-  color: white;
+  text-align: center;
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: .3rem;
   padding: 1rem 0 1rem 0;
@@ -79,17 +103,20 @@ hr
 
 .features
 {
-  font-family: 'Oswald', sans-serif;
-  color: white;
+  text-align: center;
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: .3rem;
   padding: 1rem 0 1rem 0;
-  margin-left: auto;
-  margin-right: auto;
   margin-top: 1rem;
 }
 
-.demo, .demo2, .demo3
+.demo-heading
+{
+  text-align: center;
+  margin: 1rem 0 1rem 0;
+}
+
+.demo, .demo2
 {
   font-family: 'Oswald', sans-serif;
   height: 5rem;
@@ -109,15 +136,7 @@ hr
   background-color: #4D6C0E;
 }
 
-
-
 .demo-row
-{
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-}
-
-.intro
 {
   margin-top: 1rem;
   margin-bottom: 1rem;
@@ -127,11 +146,20 @@ hr
 {
   outer-width: 100%;
   font-family: 'Merriweather', serif;
-  border-right: #89b92b 3px solid;
   padding: 2rem;
   line-height: 1.7rem;
 }
 
+.instructions
+{
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.instruct
+{
+  padding: 1rem;
+}
 
 @media screen and (max-width: 640px)
 {
