@@ -16,18 +16,20 @@ I was also too lazy to fully understand the notation for other grid systems.
 
 Mine only comes with a few simple rules.
 
-1. Use a ".container" div around your grid. Change the width as much as you want.
+1. Put the "grid.css" and "grid.js" files into your project library and reference them in the HTML header.
 
-2. Use ".fluid" and ".row" to indicate rows that will resize and reposition themselves properly in the browser. Don't
+2. Use a ".container" div around your grid. Change the width as much as you want.
+
+3. Use ".fluid" and ".row" to indicate rows that will resize and reposition themselves properly in the browser. Don't
 use ".fluid" if you want to keep tables of data lined up nicely or nav buttons side-by-side.
 
-3. Use ".column" to indicate columns. Use ".one", ".two", ".three", etc. Put these inside rows. This grid uses a
+4. Use ".column" to indicate columns. Use ".one", ".two", ".three", etc. Put these inside rows. This grid uses a
 12-column system, so make all of your columns add up to 12 inside of a row. Or don't. The JS will automatically
 center your not-full rows inside of your container.
 
-4. Enjoy yourself.
+5. Enjoy yourself.
 
-*4x. Report bugs!*
+*5x. Report bugs!*
 
 
 

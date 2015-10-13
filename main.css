@@ -150,24 +150,9 @@ pre
   line-height: 1.7rem;
 }
 
-.instructions
-{
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-}
-
-.instruct
-{
-  padding: 1rem;
-}
 
 @media screen and (max-width: 640px)
 {
-  .desc
-  {
-    border-bottom: #89b92b 3px solid;
-    border-right: none;
-  }
 
 }
 
