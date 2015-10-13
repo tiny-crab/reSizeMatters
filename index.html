@@ -76,6 +76,16 @@
         <div class="four column demo">3.2</div>
         <div class="three column demo">3.3</div>
       </div>
+      <div class="fluid row demo-row">
+        <div class="two column demo2">4.1</div>
+        <div class="eight column demo2">4.2</div>
+        <div class="two column demo2">4.3</div>
+      </div>
+      <div class="fluid row demo-row">
+        <div class="four column demo">5.1</div>
+        <div class="four column demo">5.2</div>
+        <div class="four column demo">5.3</div>
+      </div>
 
       <div class="fluid row intro">
         <div class="eight column">
@@ -85,124 +95,13 @@
             that often became awkward. The grid system wasn't ready to shift all columns into 100% width
             but some elements were too small and unreadable.
           </br></br>
-            If you continue down this page, you'll see how to use reSizeMatters, and how it works.
+            I haven't created much documentation. There are instructions in the readme, and look at this website
+            to see the basic forms of implementation. I will post documentation when it is ready.
           </br></br>
             I hope that my solution can become yours!
           </br></br>
             - Zach
           </div>
-        </div>
-      </div>
-
-      <div class="fluid row instructions">
-        <div class="seven column">
-          <h1 class="demo-heading">Here's how it works: </h1>
-        </div>
-      </div>
-
-      <div class="fluid row instructions">
-        <div class="five column">
-          <div class="instruct">
-            <h2>Step 1</h2>
-            <p>Put "grid.js" and "grid.css" into your project folder</p>
-          </div>
-        </div>
-        <div class="seven column">
-          <!-- Put image thing here -->
-        </div>
-      </div>
-
-      <div class="fluid row instructions">
-        <div class="five column">
-          <div class="instruct">
-            <h2>Step 2</h2>
-            <p>Use these script tags in your HTML page's header</p>
-          </div>
-        </div>
-        <div class="seven column">
-          <pre><code>
-&lt;head&gt;
-  &lt;script src=&quot;grid.js&quot;&gt;&lt;/script&gt;
-  &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;grid.css&quot;&gt;
-&lt;/head&gt;
-          </code></pre>
-        </div>
-      </div>
-
-      <div class="fluid row instructions">
-        <div class="five column">
-          <div class="instruct">
-            <h2>Step 3</h2>
-            <p>In the body, create a div with class "container"
-            </br>
-            (you can adjust the width in the "grid.css" file)</p>
-          </div>
-        </div>
-        <div class="seven column">
-          <pre><code>
-&lt;body&gt;
-  &lt;div class="container"&gt;
-
-  &lt;/div&gt;
-&lt;body&gt;
-          </code></pre>
-        </div>
-      </div>
-
-      <div class="fluid row instructions">
-        <div class="five column">
-          <div class="instruct">
-            <h2>Step 4</h2>
-            <p>Add a div with class "fluid row" if you want the items inside
-            to shift up and down with changes in screen size (like most
-            of this site does). Omit class "fluid" if you want to make a
-            table or elements that stay side-by-side.</p>
-          </div>
-        </div>
-        <div class="seven column">
-          <pre><code>
-&lt;body&gt;
-  &lt;div class=&quot;container&quot;&gt;
-
-    &lt;div class=&quot;fluid row&quot;&gt;
-    &lt;/div&gt;
-
-    &lt;div class=&quot;row&quot;&gt;
-    &lt;/div&gt;
-
-  &lt;/div&gt;
-&lt;body&gt;
-          </code></pre>
-        </div>
-      </div>
-      <div class="fluid row instructions">
-        <div class="five column">
-          <div class="instruct">
-            <h2>Step 5</h2>
-            <p>Add a div with class "column" in order to fill your
-            rows with content. Feel free to style them using classes! Borders will
-          not work with this current version of grid logic (working on it now)</p>
-          </br>
-            <p>reSizeMatters uses a 12-column system. Class your columns with "one",
-            "two", "three", etc. and make them add up to 12. Or don't, reSizeMatters
-            automatically centers your non-full rows. </p>
-          </div>
-        </div>
-        <div class="seven column">
-          <pre><code>
-&lt;body&gt;
-  &lt;div class=&quot;container&quot;&gt;
-    &lt;div class=&quot;fluid row&quot;&gt;
-
-      &lt;div class=&quot;six column&quot;&gt;
-      &lt;/div&gt;
-      &lt;div class=&quot;six column&quot;&gt;
-      &lt;/div&gt;
-
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;body&gt;
-          </code></pre>
         </div>
       </div>
 
